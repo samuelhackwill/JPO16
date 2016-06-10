@@ -1,0 +1,57 @@
+body{
+	margin:0;
+	top:0;
+}
+.coveredImage {
+	height: 100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index: 0;
+	transition: all 0.5s ease 0s;
+	opacity: 1;
+}
+
+svg {
+	z-index: 1;
+	height: 100%;
+	position:absolute;	
+}
+
+path{
+	cursor : pointer;
+	transition: all 0.5s ease 0s;
+	opacity: 1;
+}
+
+path.fade-out{
+	opacity:0;
+}
+
+g#viens:hover > path{
+	transition: all 0.5s ease 0s;
+	fill:blue;
+	opacity: .7;
+}
+
+g#viensg:hover > path{
+	transition: all 0.5s ease 0s;
+	fill:blue;
+	opacity: .7;
+}
+
+g#noclick > path{
+	cursor : default;
+	transition: all 0.5s ease 0s;
+}
+
+
+#credits{
+	stroke:white;
+	stroke-width:6pt;
+	fill:none;
+}
+
+#flaque{
+	fill:blue;
+}

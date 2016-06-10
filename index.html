@@ -1,0 +1,132 @@
+<head>
+	<title>jpo2016</title>
+	<link rel="stylesheet" type="text/css" href="jpo_mockup2.css">
+</head>
+
+
+<script src="snap.svg-min.js"></script>
+<script src="jquery-2.2.1.min.js"></script>
+<script src="jquery.mousewheel.js"></script>
+
+<body>
+	<img alt="bienvenue" class="coveredImage" id="main" src="A1.JPG">
+
+	
+	<div id="svg"></div>
+
+	<script type="text/javascript">
+
+    console.log("merci jackda")
+
+    $(function() {
+      $("html, body, *").mousewheel(function(event, delta) {
+        if(delta>0){
+          this.scrollLeft += 60;
+        }
+        if(delta<0){
+          this.scrollLeft -= 60;
+        }
+        event.preventDefault();
+      });
+    });
+
+    var s = Snap("#svg"); 
+    var first = "A1.JPG"
+    var data = {
+      "A1.JPG" : {viens : "A2.JPG", svg : "1.svg"},
+      "A2.JPG" : {viens : "A3.JPG", svg : "2.svg", scroll : 600},
+      "A3.JPG" : {viens : "A4.JPG", viensg : "daria.png", svg : "3.svg", scroll:3000},
+      "A4.JPG" : {viens : "A5.JPG", viensg : "A3.JPG", svg : "4.svg"},
+      "A5.JPG" : {viens : "A6.JPG", svg : "5.svg", scroll:3000},
+      "A6.JPG" : {viens : "A7.JPG", svg : "6.svg"},
+      "A7.JPG" : {viensg : "A6.JPG", viens : "A8.JPG", svg : "7.svg"},
+      "A8.JPG" : {viens : "A9.JPG", viensg : "pushup.gif", svg : "8.svg", scroll:3000},
+      "A9.JPG" : {viens : "A10.JPG",  svg : "9.svg"},
+      "A10.JPG" : {viens : "A11.JPG", svg : "10.svg"},
+      "A11.JPG" : {viens : "A12.JPG", svg : "11.svg"},
+      "A12.JPG" : {viens : "A13.JPG", svg : "12.svg"},
+      "A13.JPG" : {viens : "A14.JPG", svg : "13.svg", scroll:1650},
+      "A14.JPG" : {viens : "A15.JPG", svg : "14.svg"},
+      "A15.JPG" : {viens : "A16.JPG", svg : "15.svg"},
+      "A16.JPG" : {viens : "A17.JPG", svg : "16.svg"},
+      "A17.JPG" : {viens : "A1.JPG", svg : "17.svg"}
+    }
+
+    var currentPath = data[first]
+    document.images.main.src = first
+
+
+
+
+    var mySvg = Snap.load(currentPath.svg, function(loadedFragment){
+      s.append(loadedFragment)
+      s.click(getEventElement)
+      window.scroll(0,0)
+    });
+
+
+    function getEventElement( event ) {
+      if( event.target.localName == 'svg' ) { return }
+
+        target = event.target.parentNode.id
+
+//      if (target == "noclick") {return}
+
+if(currentPath[target] == undefined) {
+
+ return
+}
+
+document.images.main.src = currentPath[target]
+currentPath = data[currentPath[target]]
+      //this.clear()
+      event.target.parentNode.parentNode.remove()
+/*
+      event.target.classList.add('fade-out');
+      setTimeout (function () {
+       event.target.parentNode.removeChild(event.target);
+     }, 2000);
+
+     ça c'est la fonction qui watte
+*/
+
+      if(currentPath.hasOwnProperty("scroll")){
+        window.scroll(currentPath.scroll,0)
+      }else{
+        window.scroll(0,0)
+      }
+
+      mySvg = Snap.load(currentPath.svg, function(loadedFragment){
+        s.append(loadedFragment)
+        //s.click(getEventElement)
+      });
+
+
+
+    }
+
+
+
+  /*
+  s.attr({ viewBox: "0 0 802 602" });
+  var g = s.g();
+
+  var image = g.image("1.svg", 0,0, 802,602 );
+
+  g.click(clickFunc);
+
+}
+
+var clickFunc = function() {
+  if (conteur<8){
+    conteur++
+  }
+  document.images.main.src = conteur+".JPG";
+  console.log(conteur);    
+}
+*/
+
+</script>
+
+
+</body>
